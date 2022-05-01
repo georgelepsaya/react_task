@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import styled from "styled-components"
+import styled from "styled-components";
 import cartIcon from "../icons/cart_icon.svg"
 import vectorIcon from "../icons/vector.svg"
 import brandIcon from "../icons/brand_icon.svg"
@@ -69,8 +69,8 @@ export class Navbar extends Component {
       <Container>
         <Wrapper>
           <Left>
-            <MenuItem style={{ fontWeight: 600, borderBottomWidth: "2px", borderBottomColor: "#5ECE7B", borderBottomStyle: "solid", color: "#5ECE7B", borderTopWidth: "2px", borderTopColor: "#FFF", borderTopStyle: "solid"}}><StyledLink to="/clothes">CLOTHES</StyledLink></MenuItem>
-            <MenuItem><StyledLink to="/tech">TECH</StyledLink></MenuItem>
+              <MenuItem style={{ fontWeight: 600, borderBottomWidth: "2px", borderBottomColor: "#5ECE7B", borderBottomStyle: "solid", color: "#5ECE7B", borderTopWidth: "2px", borderTopColor: "#FFF", borderTopStyle: "solid" }}><StyledLink to={"/clothes"}>CLOTHES</StyledLink></MenuItem>
+            <MenuItem><StyledLink to={"/tech"}>TECH</StyledLink></MenuItem>
           </Left>
           <Center>
             <img src={brandIcon} />
