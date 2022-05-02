@@ -38,6 +38,8 @@ const ImagesContainer = styled.div`
 const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 100px;
+  margin-right: 118px;
 `
 
 const ProductName = styled.h2`
@@ -45,10 +47,36 @@ const ProductName = styled.h2`
   font-size: 30px;
 `
 
+const ProductDescription = styled.div`
+  & > p {
+    font-family: 'Roboto', sans-serif !important;
+  }
+`
+
+const AddButton = styled.button`
+  width: 292px;
+  background: rgba(94, 206, 123, 1);
+  border: none;
+  padding: 16px 32px;
+  color: #fff;
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+`
+
+const AttributeName = styled.h3`
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 43px;
+`
+
 class ProductDescriptionPage extends Component {
   product = this.props.data.find(p => p.id === this.props.params.id);
 
   render() {
+    console.log(this.product)
     return (
       <Container>
         <ImagesContainer>
@@ -60,12 +88,17 @@ class ProductDescriptionPage extends Component {
           <ViewImage src={this.product.gallery[0]} />
         </ImagesContainer>
         <ProductInfo>
-          <h2>{this.product.name}</h2>
-          <div
+          <ProductName>{this.product.name}</ProductName>
+          {this.product.attributes.map(attr => {
+            return <AttributeName key={attr.id}>{attr.name.toUpperCase()}:</AttributeName>
+          })}
+          <AttributeName>PRICE:</AttributeName>
+          <AddButton>ADD TO CART</AddButton>
+          <ProductDescription
             dangerouslySetInnerHTML={{
             __html: this.product.description,
             }}
-          ></div>
+          ></ProductDescription>
         </ProductInfo>
       </Container>
     )
