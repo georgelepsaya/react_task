@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useParams } from "react-router-dom";
 import styled from 'styled-components';
+import AttributeSet from '../components/AttributeSet';
 
 function withParams(Component) {
   return props => <Component {...props} params={useParams()} />;
@@ -48,9 +49,17 @@ const ProductName = styled.h2`
 `
 
 const ProductDescription = styled.div`
+  margin-top: 20px;
   & > p {
     font-family: 'Roboto', sans-serif !important;
   }
+`
+
+const PriceTag = styled.h3`
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 43px;
 `
 
 const AddButton = styled.button`
@@ -63,13 +72,7 @@ const AddButton = styled.button`
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-`
-
-const AttributeName = styled.h3`
-  font-family: 'Roboto', sans-serif !important;
-  font-weight: 700;
-  font-size: 18px;
-  margin-top: 43px;
+  margin: 20px 0;
 `
 
 class ProductDescriptionPage extends Component {
@@ -90,9 +93,9 @@ class ProductDescriptionPage extends Component {
         <ProductInfo>
           <ProductName>{this.product.name}</ProductName>
           {this.product.attributes.map(attr => {
-            return <AttributeName key={attr.id}>{attr.name.toUpperCase()}:</AttributeName>
+            return <AttributeSet attr={attr} />
           })}
-          <AttributeName>PRICE:</AttributeName>
+          <PriceTag>PRICE:</PriceTag>
           <AddButton>ADD TO CART</AddButton>
           <ProductDescription
             dangerouslySetInnerHTML={{
