@@ -5,6 +5,7 @@ import ProductListingPage from "../pages/ProductListingPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import styled from "styled-components";
+import ProductDescriptionPage from "../pages/ProductDescriptionPage";
 
 const MainContainer = styled.main`
   margin-top: 80px;
@@ -30,6 +31,7 @@ const MainWrap = () => {
             <Routes>
               <Route path="/clothes" element={<ProductListingPage data={allData} category={"clothes"} />} />
               <Route path="/tech" element={<ProductListingPage data={allData} category={"tech"} />} />
+              <Route path="/product/:id" element={<ProductDescriptionPage data={allData.category.products} />} />
             </Routes>
           </ProductsContainer>
         </MainContainer>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
+import cartIcon from "../icons/cart_icon_circle.svg"
 
 const CategoryName = styled.h1`
   font-weight: normal;
@@ -14,7 +15,7 @@ const ProductImage = styled.img`
   object-fit: cover;
 `
 
-const ProductContainer = styled.div`
+const ProductContainer = styled.a`
   width: 354px;
   height: 412px;
   display: flex;
@@ -29,6 +30,9 @@ const ProductContainer = styled.div`
     transition: box-shadow 300ms;
   }
   position: relative;
+  margin-bottom: 103px;
+  cursor: pointer;
+  text-decoration: none;
 `
 
 const ProductName = styled.h3`
@@ -51,7 +55,12 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  flex: 1;
+  &:after {
+    display: block;
+    content: "";
+    margin: 2px;
+    flex: 999 999 auto;
+  }
 `
 
 const Circle = styled.div`
@@ -62,11 +71,18 @@ const Circle = styled.div`
   top: 318px;
   left: 290px;
   border-radius: 50%;
-  display: none;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: 300ms;
+  opacity: 0;
+  box-shadow: 0px 4px 11px 2px rgba(29, 31, 34, 0.1);
+  cursor: pointer;
   ${ProductContainer}:hover & {
-    display: block;
-    transition: display 300ms;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0ms, opacity 300ms linear;
   }
 `
 
@@ -79,15 +95,11 @@ export class ProductListingPage extends Component {
         <CategoryName>{this.props.category}</CategoryName>
         <Container>
           {filteredProdcuts.map(product => (
-            <ProductContainer>
-              <Circle />
+            <ProductContainer key={product.id} href={`/product/${product.id}`}>
+              <Circle>
+                <img src={cartIcon} style={{width: "24px"}} />
+              </Circle>
               <ProductImage src={product.gallery[0]} />
-              {/* <h2>{product.name}</h2> */}
-              {/* <div
-                dangerouslySetInnerHTML={{
-                __html: product.description,
-              }}
-              ></div> */}
               <ProductInfo>
                 <ProductName>{product.name}</ProductName>
                 <ProductPrice>{product.prices[0].amount}</ProductPrice>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import cartIcon from "../icons/cart_icon.svg"
 import vectorIcon from "../icons/vector.svg"
@@ -59,18 +59,28 @@ const MenuItem = styled.div`
   cursor: pointer;
 `
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`
-
 export class Navbar extends Component {
   render() {
     return (
       <Container>
         <Wrapper>
           <Left>
-              <MenuItem style={{ fontWeight: 600, borderBottomWidth: "2px", borderBottomColor: "#5ECE7B", borderBottomStyle: "solid", color: "#5ECE7B", borderTopWidth: "2px", borderTopColor: "#FFF", borderTopStyle: "solid" }}><StyledLink to={"/clothes"}>CLOTHES</StyledLink></MenuItem>
-            <MenuItem><StyledLink to={"/tech"}>TECH</StyledLink></MenuItem>
+            <MenuItem
+              // style={{ borderBottomWidth: "2px", borderBottomColor: "#5ECE7B", borderBottomStyle: "solid", borderTopWidth: "2px", borderTopColor: "#FFF", borderTopStyle: "solid" }}
+            >
+              <NavLink to={"/clothes"} style={({ isActive }) => ({
+              color: isActive ? '#5ECE7B' : '#000',
+              })}>
+                CLOTHES
+              </NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to={"/tech"} style={({ isActive }) => ({
+              color: isActive ? '#5ECE7B' : '#000',
+              })}>
+                TECH
+              </NavLink>
+            </MenuItem>
           </Left>
           <Center>
             <img src={brandIcon} />
@@ -81,7 +91,7 @@ export class Navbar extends Component {
               <img src={vectorIcon} style={{marginLeft: "7px"}} />
             </Currency>
             <CartButton>
-              <Badge badgeContent={2} color="primary" overlap="rectangular">
+              <Badge badgeContent={1} color="primary" overlap="rectangular">
                 <img src={cartIcon} />
               </Badge>
             </CartButton>
