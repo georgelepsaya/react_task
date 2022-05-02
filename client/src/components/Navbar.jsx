@@ -5,6 +5,7 @@ import cartIcon from "../icons/cart_icon.svg"
 import vectorIcon from "../icons/vector.svg"
 import brandIcon from "../icons/brand_icon.svg"
 import Badge from "@material-ui/core/Badge";
+import classes from "./Navbar.module.css";
 
 const Container = styled.div`
   height: 80px;
@@ -54,8 +55,8 @@ const MenuItem = styled.div`
   font-size: 16px;
   height: 100%;
   display: flex;
+  width: 97px;
   align-items: center;
-  padding: 0px 16px;
   cursor: pointer;
 `
 
@@ -68,15 +69,19 @@ export class Navbar extends Component {
             <MenuItem
               // style={{ borderBottomWidth: "2px", borderBottomColor: "#5ECE7B", borderBottomStyle: "solid", borderTopWidth: "2px", borderTopColor: "#FFF", borderTopStyle: "solid" }}
             >
-              <NavLink to={"/clothes"} style={({ isActive }) => ({
-              color: isActive ? '#5ECE7B' : '#000',
+              <NavLink className={classes.navlink} to={"/clothes"} style={({ isActive }) => ({
+                color: isActive ? '#5ECE7B' : '#000',
+                fontWeight: isActive ? 600 : 400,
+                borderBottom: isActive ? "2px solid #5ECE7B" : "",
               })}>
                 CLOTHES
               </NavLink>
             </MenuItem>
             <MenuItem>
-              <NavLink to={"/tech"} style={({ isActive }) => ({
-              color: isActive ? '#5ECE7B' : '#000',
+              <NavLink className={classes.navlink} to={"/tech"} style={({ isActive }) => ({
+                color: isActive ? '#5ECE7B' : '#000',
+                fontWeight: isActive ? 600 : 400,
+                borderBottom: isActive ? "2px solid #5ECE7B" : "",
               })}>
                 TECH
               </NavLink>

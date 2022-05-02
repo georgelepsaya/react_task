@@ -50,8 +50,8 @@ const ProductName = styled.h2`
 
 const ProductDescription = styled.div`
   margin-top: 20px;
-  & > p {
-    font-family: 'Roboto', sans-serif !important;
+  &, * {
+    font-family: 'Roboto', sans-serif;
   }
 `
 
