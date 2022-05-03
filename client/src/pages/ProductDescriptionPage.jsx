@@ -77,7 +77,18 @@ const AddButton = styled.button`
 `
 
 class ProductDescriptionPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showImage: this.product.gallery[0],
+    };
+  }
+
   product = this.props.data.find(p => p.id === this.props.params.id);
+
+  imgClickHandler = (pic) => {
+    this.setState({showImage: pic});
+  }
 
   render() {
     return (
@@ -85,10 +96,10 @@ class ProductDescriptionPage extends Component {
         <ImagesContainer>
           <GalleryContainer>
             {this.product.gallery.map(pic => {
-              return <GalleryImage key={Math.floor(Math.random()*1000000).toString()} src={pic} />
+              return <GalleryImage onClick={() => this.imgClickHandler(pic)} key={Math.floor(Math.random()*1000000).toString()} src={pic} />
             })}
           </GalleryContainer>
-          <ViewImage src={this.product.gallery[0]} />
+          <ViewImage src={this.state.showImage} />
         </ImagesContainer>
         <ProductInfo>
           <ProductName>{this.product.name}</ProductName>
