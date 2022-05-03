@@ -28,9 +28,10 @@ const Currency = styled.span`
   cursor: pointer;
 `
 
-const CartButton = styled.div`
+const CartButton = styled.a`
   display: flex;
   margin-left: 22px;
+  cursor: pointer;
 `
 
 const Left = styled.div`
@@ -69,7 +70,7 @@ export class Navbar extends Component {
           <Left>
             {pages.map(page => {
               return (
-                <MenuItem>
+                <MenuItem key={page.name}>
                   <NavLink className={classes.navlink} to={`/${page.name}`} style={({ isActive }) => ({
                     color: isActive ? '#5ECE7B' : '#000',
                     fontWeight: isActive ? 600 : 400,
@@ -81,26 +82,6 @@ export class Navbar extends Component {
                 </MenuItem>
               )
             })}
-            {/* <MenuItem>
-              <NavLink className={classes.navlink} to={"/clothes"} style={({ isActive }) => ({
-                color: isActive ? '#5ECE7B' : '#000',
-                fontWeight: isActive ? 600 : 400,
-                borderBottom: isActive ? "2px solid #5ECE7B" : "",
-                transition: "all 100ms",
-              })}>
-                CLOTHES
-              </NavLink>
-            </MenuItem>
-            <MenuItem>
-              <NavLink className={classes.navlink} to={"/tech"} style={({ isActive }) => ({
-                color: isActive ? '#5ECE7B' : '#000',
-                fontWeight: isActive ? 600 : 400,
-                borderBottom: isActive ? "2px solid #5ECE7B" : "",
-                transition: "all 100ms",
-              })}>
-                TECH
-              </NavLink>
-            </MenuItem> */}
           </Left>
           <Center>
             <img src={brandIcon} />
@@ -110,7 +91,7 @@ export class Navbar extends Component {
               $
               <img src={vectorIcon} style={{marginLeft: "7px"}} />
             </Currency>
-            <CartButton>
+            <CartButton href="/cart">
               <Badge badgeContent={1} color="primary" overlap="rectangular">
                 <img src={cartIcon} />
               </Badge>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import styled from "styled-components";
 import ProductDescriptionPage from "../pages/ProductDescriptionPage";
+import CartPage from "../pages/CartPage";
 
 const MainContainer = styled.main`
   margin-top: 80px;
@@ -30,6 +31,7 @@ const MainWrap = (props) => {
                 return <Route key={Math.random()} path={`${category.name}`} element={<ProductListingPage data={category.products} category={`${category.name}`} />} />
               })}
               <Route path="/product/:id" element={<ProductDescriptionPage data={allData.categories[0].products} />} />
+              <Route path="/cart" element={<CartPage />} />
             </Routes>
           </ProductsContainer>
         </MainContainer>
