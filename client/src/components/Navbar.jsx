@@ -62,16 +62,31 @@ const MenuItem = styled.div`
 
 export class Navbar extends Component {
   render() {
+    const pages = this.props.pages;
     return (
       <Container>
         <Wrapper>
           <Left>
-            <MenuItem>
+            {pages.map(page => {
+              return (
+                <MenuItem>
+                  <NavLink className={classes.navlink} to={`/${page.name}`} style={({ isActive }) => ({
+                    color: isActive ? '#5ECE7B' : '#000',
+                    fontWeight: isActive ? 600 : 400,
+                    borderBottom: isActive ? "2px solid #5ECE7B" : "",
+                    transition: "all 100ms",
+                  })}>
+                    {page.name}
+                  </NavLink>
+                </MenuItem>
+              )
+            })}
+            {/* <MenuItem>
               <NavLink className={classes.navlink} to={"/clothes"} style={({ isActive }) => ({
                 color: isActive ? '#5ECE7B' : '#000',
                 fontWeight: isActive ? 600 : 400,
                 borderBottom: isActive ? "2px solid #5ECE7B" : "",
-                transition: "all 300ms",
+                transition: "all 100ms",
               })}>
                 CLOTHES
               </NavLink>
@@ -81,11 +96,11 @@ export class Navbar extends Component {
                 color: isActive ? '#5ECE7B' : '#000',
                 fontWeight: isActive ? 600 : 400,
                 borderBottom: isActive ? "2px solid #5ECE7B" : "",
-                transition: "all 300ms",
+                transition: "all 100ms",
               })}>
                 TECH
               </NavLink>
-            </MenuItem>
+            </MenuItem> */}
           </Left>
           <Center>
             <img src={brandIcon} />

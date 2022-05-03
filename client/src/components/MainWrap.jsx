@@ -18,7 +18,6 @@ const ProductsContainer = styled.div`
 const MainWrap = (props) => {
   const allData = props.data;
   if (allData) {
-    console.log(allData)
     return (
       <Router>
         <header>
@@ -28,7 +27,7 @@ const MainWrap = (props) => {
           <ProductsContainer>
             <Routes>
               {allData.categories.map(category => {
-                return <Route path={`${category.name}`} element={<ProductListingPage data={category.products} category={`${category.name}`} />} />
+                return <Route key={Math.random()} path={`${category.name}`} element={<ProductListingPage data={category.products} category={`${category.name}`} />} />
               })}
               <Route path="/product/:id" element={<ProductDescriptionPage data={allData.categories[0].products} />} />
             </Routes>

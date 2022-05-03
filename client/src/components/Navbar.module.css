@@ -6,4 +6,6 @@
   display: flex;
   align-items: center;
   transition: 300ms;
+  border-bottom: 0px solid #5ECE7B;
+  text-transform: uppercase;
 }
