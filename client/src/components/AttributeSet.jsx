@@ -32,16 +32,15 @@ const Item = styled.div`
 class AttributeSet extends Component {
   render() {
     const items = this.props.attr.items;
-    console.log(items);
     return (
       <>
         <AttributeName key={this.props.attr.id}>{this.props.attr.name.toUpperCase()}:</AttributeName>
         <ItemContainer>
           {items.map(item => {
             if (this.props.attr.name === "Color") {
-              return <Item bg={item.value} />
+              return <Item key={item.id} bg={item.value} />
             }
-            return <Item>{item.value}</Item>
+            return <Item key={item.id}>{item.value}</Item>
           })}
         </ItemContainer>
       </>

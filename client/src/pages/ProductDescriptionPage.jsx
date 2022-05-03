@@ -18,6 +18,7 @@ const GalleryImage = styled.img`
   height: 80px;
   margin-bottom: 40px;
   object-fit: cover;
+  cursor: pointer;
 `
 
 const Container = styled.div`
@@ -79,13 +80,12 @@ class ProductDescriptionPage extends Component {
   product = this.props.data.find(p => p.id === this.props.params.id);
 
   render() {
-    console.log(this.product)
     return (
       <Container>
         <ImagesContainer>
           <GalleryContainer>
             {this.product.gallery.map(pic => {
-              return <GalleryImage src={pic} />
+              return <GalleryImage key={Math.floor(Math.random()*1000000).toString()} src={pic} />
             })}
           </GalleryContainer>
           <ViewImage src={this.product.gallery[0]} />
@@ -93,7 +93,7 @@ class ProductDescriptionPage extends Component {
         <ProductInfo>
           <ProductName>{this.product.name}</ProductName>
           {this.product.attributes.map(attr => {
-            return <AttributeSet attr={attr} />
+            return <AttributeSet key={Math.floor(Math.random()*1000000).toString()} attr={attr} />
           })}
           <PriceTag>PRICE:</PriceTag>
           <AddButton>ADD TO CART</AddButton>

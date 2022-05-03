@@ -1,6 +1,4 @@
-import { React, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
-import { GET_DATA } from "../GraphQL/Queries";
+import { React } from "react";
 import ProductListingPage from "../pages/ProductListingPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -17,25 +15,25 @@ const ProductsContainer = styled.div`
   width: 85%;
 `
 
-const MainWrap = () => {
-  const { error, loading, data } = useQuery(GET_DATA);
-  let allData = data;
+const MainWrap = (props) => {
+  const allData = props.data;
   if (allData) {
+    console.log(allData)
     return (
       <Router>
         <header>
-          <Navbar />
+          <Navbar pages={allData.categories} />
         </header>
         <MainContainer>
           <ProductsContainer>
             <Routes>
-              <Route path="/clothes" element={<ProductListingPage data={allData} category={"clothes"} />} />
-              <Route path="/tech" element={<ProductListingPage data={allData} category={"tech"} />} />
-              <Route path="/product/:id" element={<ProductDescriptionPage data={allData.category.products} />} />
+              {allData.categories.map(category => {
+                return <Route path={`${category.name}`} element={<ProductListingPage data={category.products} category={`${category.name}`} />} />
+              })}
+              <Route path="/product/:id" element={<ProductDescriptionPage data={allData.categories[0].products} />} />
             </Routes>
           </ProductsContainer>
         </MainContainer>
-        <ProductListingPage data={allData} />
       </Router>
     );
   }

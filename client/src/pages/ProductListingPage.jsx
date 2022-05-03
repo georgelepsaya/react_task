@@ -88,13 +88,12 @@ const Circle = styled.div`
 
 export class ProductListingPage extends Component {
   render() {
-    const products = this.props.data.category.products;
-    const filteredProdcuts = products.filter(product => product.category === this.props.category)
+    const products = this.props.data;
     return (
       <>
         <CategoryName>{this.props.category}</CategoryName>
         <Container>
-          {filteredProdcuts.map(product => (
+          {products.map(product => (
             <ProductContainer key={product.id} href={`/product/${product.id}`}>
               <Circle>
                 <img src={cartIcon} style={{width: "24px"}} />

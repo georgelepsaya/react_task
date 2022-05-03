@@ -6,7 +6,7 @@ import {
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import MainWrap from './components/MainWrap';
+import DataProvider from "./components/DataProvider";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if (graphqlErrors) {
@@ -26,7 +26,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <MainWrap />
+      <DataProvider />
     </ApolloProvider>
   );
 }

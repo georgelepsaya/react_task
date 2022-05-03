@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_DATA = gql`
   query MainPageQuery {
-    category {
+    categories {
       name
       products {
         id

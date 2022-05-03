@@ -66,13 +66,12 @@ export class Navbar extends Component {
       <Container>
         <Wrapper>
           <Left>
-            <MenuItem
-              // style={{ borderBottomWidth: "2px", borderBottomColor: "#5ECE7B", borderBottomStyle: "solid", borderTopWidth: "2px", borderTopColor: "#FFF", borderTopStyle: "solid" }}
-            >
+            <MenuItem>
               <NavLink className={classes.navlink} to={"/clothes"} style={({ isActive }) => ({
                 color: isActive ? '#5ECE7B' : '#000',
                 fontWeight: isActive ? 600 : 400,
                 borderBottom: isActive ? "2px solid #5ECE7B" : "",
+                transition: "all 300ms",
               })}>
                 CLOTHES
               </NavLink>
@@ -82,6 +81,7 @@ export class Navbar extends Component {
                 color: isActive ? '#5ECE7B' : '#000',
                 fontWeight: isActive ? 600 : 400,
                 borderBottom: isActive ? "2px solid #5ECE7B" : "",
+                transition: "all 300ms",
               })}>
                 TECH
               </NavLink>
