@@ -28,6 +28,7 @@ const Container = styled.div`
 `
 
 const ViewImage = styled.img`
+  object-fit: contain;
   max-height: 511px;
   max-width: 610px;
 `
@@ -76,11 +77,19 @@ const AddButton = styled.button`
   margin: 20px 0;
 `
 
+const Price = styled.p`
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+`
+
 class ProductDescriptionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showImage: this.product.gallery[0],
+      imageIsSelected: true,
     };
   }
 
@@ -107,6 +116,7 @@ class ProductDescriptionPage extends Component {
             return <AttributeSet key={Math.floor(Math.random()*1000000).toString()} attr={attr} />
           })}
           <PriceTag>PRICE:</PriceTag>
+          <Price>${this.product.prices[0].amount}</Price>
           <AddButton>ADD TO CART</AddButton>
           <ProductDescription
             dangerouslySetInnerHTML={{

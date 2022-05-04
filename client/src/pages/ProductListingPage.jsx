@@ -101,7 +101,7 @@ export class ProductListingPage extends Component {
               <ProductImage src={product.gallery[0]} />
               <ProductInfo>
                 <ProductName>{product.name}</ProductName>
-                <ProductPrice>{product.prices[0].amount}</ProductPrice>
+                <ProductPrice>${product.prices[0].amount}</ProductPrice>
               </ProductInfo>
             </ProductContainer>
           ))}

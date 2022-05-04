@@ -1,0 +1,141 @@
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import plusIcon from "../../icons/plus.svg";
+import minusIcon from "../../icons/minus.svg";
+
+const Container = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #E5E5E5;
+  padding: 24px 0;
+  min-height: 260px;
+  height: 1px;
+`
+
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+`
+
+const View = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+`
+
+const Name = styled.h3`
+  font-weight: 600;
+  font-size: 30px;
+`
+
+const Price = styled.p`
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 20px;
+`
+
+const AttributeName = styled.h3`
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 20px;
+`
+
+const ItemContainer = styled.div`
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+`
+
+const Item = styled.div`
+  height: 45px;
+  width: 63px;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  margin-right: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: ${props => props.bg};
+`
+
+const ChangeAmount = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const ChangeAmountButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1D1F22;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+`
+
+const Amount = styled.p`
+  font-weight: 500;
+  font-size: 24px;
+`
+
+const ImgView = styled.img`
+  width: 200px;
+  object-fit: cover;
+  margin-left: 24px;
+`
+
+class CartItem extends Component {
+  render() {
+    const product = this.props.product;
+    console.log(product);
+    return (
+      <Container>
+        <Info>
+          <Name>{product.name}</Name>
+          <Price>${product.prices[0].amount}</Price>
+          {product.attributes.map(attr => {
+            return (
+              <>
+                <AttributeName key={attr.id}>{attr.name.toUpperCase()}:</AttributeName>
+                <ItemContainer>
+                  {attr.items.map(item => {
+                    if (attr.name === "Color") {
+                      return <Item key={item.id} bg={item.value} style={{width: "32px", height: "32px", border: "none"}} />
+                    }
+                    return <Item key={item.id}>{item.value}</Item>
+                  })}
+                </ItemContainer>
+              </>
+            )
+          })}
+        </Info>
+        <View>
+          <ChangeAmount>
+            <ChangeAmountButton>
+              <img src={plusIcon} />
+            </ChangeAmountButton>
+            <Amount>1</Amount>
+            <ChangeAmountButton>
+              <img src={minusIcon} />
+            </ChangeAmountButton>
+          </ChangeAmount>
+          <ImgView src={product.gallery[0]} />
+        </View>
+      </Container>
+    )
+  }
+}
+
+export default CartItem

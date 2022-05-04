@@ -31,7 +31,7 @@ const MainWrap = (props) => {
                 return <Route key={Math.random()} path={`${category.name}`} element={<ProductListingPage data={category.products} category={`${category.name}`} />} />
               })}
               <Route path="/product/:id" element={<ProductDescriptionPage data={allData.categories[0].products} />} />
-              <Route path="/cart" element={<CartPage />} />
+              <Route path="/cart" element={<CartPage data={allData} />} />
             </Routes>
           </ProductsContainer>
         </MainContainer>
