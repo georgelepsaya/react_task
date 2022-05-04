@@ -97,15 +97,14 @@ const ImgView = styled.img`
 class CartItem extends Component {
   render() {
     const product = this.props.product;
-    console.log(product);
     return (
-      <Container>
+      <Container >
         <Info>
           <Name>{product.name}</Name>
           <Price>${product.prices[0].amount}</Price>
           {product.attributes.map(attr => {
             return (
-              <>
+              <div key={Math.random()}>
                 <AttributeName key={attr.id}>{attr.name.toUpperCase()}:</AttributeName>
                 <ItemContainer>
                   {attr.items.map(item => {
@@ -115,7 +114,7 @@ class CartItem extends Component {
                     return <Item key={item.id}>{item.value}</Item>
                   })}
                 </ItemContainer>
-              </>
+              </div>
             )
           })}
         </Info>
