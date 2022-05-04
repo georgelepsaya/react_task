@@ -11,8 +11,6 @@ const Container = styled.div`
   align-items: center;
   border-top: 1px solid #E5E5E5;
   padding: 24px 0;
-  min-height: 260px;
-  height: 1px;
 `
 
 const Info = styled.div`
@@ -23,7 +21,7 @@ const Info = styled.div`
 `
 
 const View = styled.div`
-  height: 100%;
+  height: 288px;
   display: flex;
   flex-direction: row;
 `

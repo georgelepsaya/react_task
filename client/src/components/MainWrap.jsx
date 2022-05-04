@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import styled from "styled-components";
 import ProductDescriptionPage from "../pages/ProductDescriptionPage";
 import CartPage from "../pages/CartPage";
+import Footer from "./Footer";
 
 const MainContainer = styled.main`
   margin-top: 80px;
@@ -35,6 +36,7 @@ const MainWrap = (props) => {
             </Routes>
           </ProductsContainer>
         </MainContainer>
+        <Footer />
       </Router>
     );
   }
