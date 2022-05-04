@@ -45,6 +45,7 @@ const OrderButton = styled.button`
   font-weight: 600;
   font-size: 14px;
   margin-top: 16px;
+  cursor: pointer;
 `
 
 class Total extends Component {
