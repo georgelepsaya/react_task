@@ -1,11 +1,20 @@
-import React, { Component } from 'react'
-import { Link, NavLink } from "react-router-dom";
+import React, { Component } from 'react';
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import cartIcon from "../icons/cart_icon.svg"
-import vectorIcon from "../icons/vector.svg"
-import brandIcon from "../icons/brand_icon.svg"
+import cartIcon from "../icons/cart_icon.svg";
+import brandIcon from "../icons/brand_icon.svg";
 import Badge from "@material-ui/core/Badge";
 import classes from "./Navbar.module.css";
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import Currencies from './Currencies';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1D1F22'
+    }
+  }
+});
 
 const Container = styled.div`
   height: 80px;
@@ -21,11 +30,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   display: flex;
-`
-
-const Currency = styled.span`
-  font-size: 18;
-  cursor: pointer;
 `
 
 const CartButton = styled.a`
@@ -45,9 +49,11 @@ const Center = styled.div`
   display: flex;
   justify-content: center;
 `
+
 const Right = styled.div`
   flex: 1;
   display: flex;
+  flex-direction: row;
   justify-content: flex-end;
   align-items: center;
 `
@@ -65,40 +71,39 @@ export class Navbar extends Component {
   render() {
     const pages = this.props.pages;
     return (
-      <Container>
-        <Wrapper>
-          <Left>
-            {pages.map(page => {
-              return (
-                <MenuItem key={page.name}>
-                  <NavLink className={classes.navlink} to={`/${page.name}`} style={({ isActive }) => ({
-                    color: isActive ? '#5ECE7B' : '#000',
-                    fontWeight: isActive ? 600 : 400,
-                    borderBottom: isActive ? "2px solid #5ECE7B" : "",
-                    transition: "all 100ms",
-                  })}>
-                    {page.name}
-                  </NavLink>
-                </MenuItem>
-              )
-            })}
-          </Left>
-          <Center>
-            <img src={brandIcon} />
-          </Center>
-          <Right>
-            <Currency>
-              $
-              <img src={vectorIcon} style={{marginLeft: "7px"}} />
-            </Currency>
-            <CartButton href="/cart">
-              <Badge badgeContent={1} color="primary" overlap="rectangular">
-                <img src={cartIcon} />
-              </Badge>
-            </CartButton>
-          </Right>
-        </Wrapper>
-      </Container>
+      <MuiThemeProvider theme={theme}>
+        <Container>
+          <Wrapper>
+            <Left>
+              {pages.map(page => {
+                return (
+                  <MenuItem key={page.name}>
+                    <NavLink className={classes.navlink} to={`/${page.name}`} style={({ isActive }) => ({
+                      color: isActive ? '#5ECE7B' : '#000',
+                      fontWeight: isActive ? 600 : 400,
+                      borderBottom: isActive ? "2px solid #5ECE7B" : "",
+                      transition: "all 100ms",
+                    })}>
+                      {page.name}
+                    </NavLink>
+                  </MenuItem>
+                )
+              })}
+            </Left>
+            <Center>
+              <img src={brandIcon} />
+            </Center>
+            <Right>
+              <Currencies />
+              <CartButton href="/cart">
+                <Badge badgeContent={3} color="primary" overlap="rectangular">
+                  <img src={cartIcon} />
+                </Badge>
+              </CartButton>
+            </Right>
+          </Wrapper>
+        </Container>
+      </MuiThemeProvider>
     )
   }
 }
