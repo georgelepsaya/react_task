@@ -69,7 +69,8 @@ const MenuItem = styled.div`
 
 export class Navbar extends Component {
   render() {
-    const pages = this.props.pages;
+    const pages = this.props.data.categories;
+    const currencies = this.props.data.currencies;
     return (
       <MuiThemeProvider theme={theme}>
         <Container>
@@ -94,7 +95,7 @@ export class Navbar extends Component {
               <img src={brandIcon} />
             </Center>
             <Right>
-              <Currencies />
+              <Currencies currs={currencies} />
               <CartButton href="/cart">
                 <Badge badgeContent={3} color="primary" overlap="rectangular">
                   <img src={cartIcon} />

@@ -23,7 +23,7 @@ const MainWrap = (props) => {
     return (
       <Router>
         <header>
-          <Navbar pages={allData.categories} />
+          <Navbar data={allData} />
         </header>
         <MainContainer>
           <ProductsContainer>
