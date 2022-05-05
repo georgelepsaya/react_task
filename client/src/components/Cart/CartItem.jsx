@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import plusIcon from "../../icons/plus.svg";
 import minusIcon from "../../icons/minus.svg";
+import SlideRight from "../../icons/slide-right.svg"
+import SlideLeft from "../../icons/slide-left.svg";
 
 const Container = styled.div`
   width: 90%;
@@ -90,11 +92,64 @@ const Amount = styled.p`
 
 const ImgView = styled.img`
   width: 200px;
+  height: 100%;
   object-fit: cover;
   margin-left: 24px;
 `
 
+const SliderContainer = styled.div`
+  position: absolute;
+  width: 56px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+`
+
+const SliderButton = styled.div`
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.73);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const ImgViewWrap = styled.div`
+  height: 100%;
+  position: relative;
+`
+
 class CartItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageIndex: 0,
+    }
+  }
+
+  leftClickHandler = () => {
+    this.setState((prevState) => {
+      if (prevState.imageIndex - 1 < 0) {
+        return {imageIndex: this.product.gallery.length - 1};
+      }
+      return {imageIndex: prevState.imageIndex - 1};
+    });
+  }
+
+  rightClickHandler = () => {
+    this.setState((prevState) => {
+      if (prevState.imageIndex + 1 > this.product.gallery.length - 1) {
+        return {imageIndex: 0};
+      }
+      return {imageIndex: prevState.imageIndex + 1};
+    });
+  }
+
+  product = this.props.product;
+
   render() {
     const product = this.props.product;
     return (
@@ -128,7 +183,13 @@ class CartItem extends Component {
               <img src={minusIcon} />
             </ChangeAmountButton>
           </ChangeAmount>
-          <ImgView src={product.gallery[0]} />
+          <ImgViewWrap>
+            <ImgView src={product.gallery[this.state.imageIndex]} />
+            <SliderContainer>
+              <SliderButton onClick={() => this.leftClickHandler()} ><img src={SlideLeft} /></SliderButton>
+              <SliderButton onClick={() => this.rightClickHandler()} ><img src={SlideRight} /></SliderButton>
+            </SliderContainer>
+          </ImgViewWrap>
         </View>
       </Container>
     )
