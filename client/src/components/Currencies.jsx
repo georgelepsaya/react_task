@@ -60,7 +60,8 @@ class Currencies extends Component {
   }
 
   changeCurrHandler = (curr) => {
-    this.setState({showCurr: curr})
+    this.setState({ showCurr: curr });
+    this.toggleCurrs();
   }
 
   render() {
