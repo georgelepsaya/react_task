@@ -47,10 +47,19 @@ class Currencies extends Component {
     this.state = {
       showCurr: this.currs[0],
       dropdownCurrs: false,
+      scrolled: 0,
     }
   }
 
   currs = this.props.currs;
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll, true);
+  }
+
+  handleScroll = () => {
+    this.setState({ scrolled: document.scrollingElement.scrollTop})
+  }
 
   toggleCurrs = () => {
     this.setState((prevState) => {
@@ -73,7 +82,7 @@ class Currencies extends Component {
           {this.state.dropdownCurrs ? <img src={vectorUp} style={{ marginLeft: "7px" }} /> : <img src={vectorIcon} style={{ marginLeft: "7px" }} />}
         </Currency>
         {this.state.dropdownCurrs &&
-          <CurrenciesOptions>
+          <CurrenciesOptions className={this.state.scrolled > 70 ? classes.togglePosition : ""}>
             {this.currs.map(curr => {
               return <Option onClick={() => this.changeCurrHandler(curr)} key={curr.label}>{curr.symbol} {curr.label}</Option>
             })}
