@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Badge from "@material-ui/core/Badge";
 import cartIcon from "../../icons/cart_icon.svg";
+import classes from "./MiniCart.module.css";
 
 const CartButton = styled.a`
   display: flex;
@@ -18,25 +19,33 @@ const ModalContainer = styled.div`
   width: 325px;
   height: 677px;
   background-color: #fff;
-  border: 1px solid black;
   top: 50px;
-  left: -250px;
+  right: -30px;
   z-index: 999;
 `
 
-const Overlay = styled.div`
-  position: absolute;
-  left: 0px;
-  top: 80px;
-  background: rgba(57, 55, 72, 0.22);
-`
+// const Overlay = styled.div`
+//   position: absolute;
+//   left: 0px;
+//   top: 80px;
+//   background: rgba(57, 55, 72, 0.22);
+// `
 
 class MiniCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
+      scrolled: 0,
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll, true);
+  }
+
+  handleScroll = () => {
+    this.setState({ scrolled: document.scrollingElement.scrollTop})
   }
 
   toggleOverlay = () => {
@@ -58,9 +67,9 @@ class MiniCart extends Component {
         </CartButton>
         {this.state.showModal && 
           <>
-            <Overlay />
-            <ModalContainer>
-              Cart
+            {/* <Overlay /> */}
+            <ModalContainer className={this.state.scrolled > 75 ? classes.togglePosition : ""}>
+
             </ModalContainer>
           </>
         }
