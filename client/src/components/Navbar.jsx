@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import cartIcon from "../icons/cart_icon.svg";
 import brandIcon from "../icons/brand_icon.svg";
-import Badge from "@material-ui/core/Badge";
 import classes from "./Navbar.module.css";
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import Currencies from './Currencies';
+import MiniCart from './MiniCart/MiniCart';
 
 const theme = createTheme({
   palette: {
@@ -30,12 +29,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   display: flex;
-`
-
-const CartButton = styled.a`
-  display: flex;
-  margin-left: 22px;
-  cursor: pointer;
 `
 
 const Left = styled.div`
@@ -96,11 +89,7 @@ export class Navbar extends Component {
             </Center>
             <Right>
               <Currencies currs={currencies} />
-              <CartButton href="/cart">
-                <Badge badgeContent={3} color="primary" overlap="rectangular">
-                  <img src={cartIcon} />
-                </Badge>
-              </CartButton>
+              <MiniCart data={this.props.data.categories[0].products} />
             </Right>
           </Wrapper>
         </Container>

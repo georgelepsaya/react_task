@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import vectorIcon from "../icons/vector.svg";
 import vectorUp from "../icons/vector_up.svg";
 import styled from "styled-components";
+import classes from "./Currencies.module.css";
 
 const CurrenciesContainer = styled.div`
   position: relative;
@@ -16,8 +17,8 @@ const Currency = styled.span`
 
 const CurrenciesOptions = styled.div`
   position: absolute;
-  top: 30px;
-  left: -20px;
+  top: 40px;
+  right: -20px;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -65,7 +66,6 @@ class Currencies extends Component {
   }
 
   render() {
-    console.log(this.currs)
     return (
       <CurrenciesContainer>
         <Currency onClick={() => this.toggleCurrs()}>
