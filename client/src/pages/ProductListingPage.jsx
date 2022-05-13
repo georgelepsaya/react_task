@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
-import cartIcon from "../icons/cart_icon_circle.svg"
+import cartIcon from "../icons/cart_icon_circle.svg";
+import classes from "./ProductListingPage.module.css";
 
 const CategoryName = styled.h1`
   font-weight: normal;
@@ -86,6 +87,15 @@ const Circle = styled.div`
   }
 `
 
+const StockText = styled.p`
+  position: absolute;
+  font-weight: 400;
+  font-size: 24px;
+  color: #8D8F9A;
+  top: 162px;
+  right: 107px;
+`
+
 export class ProductListingPage extends Component {
   render() {
     const products = this.props.data;
@@ -94,7 +104,8 @@ export class ProductListingPage extends Component {
         <CategoryName>{this.props.category}</CategoryName>
         <Container>
           {products.map(product => (
-            <ProductContainer key={product.id} href={`/product/${product.id}`}>
+            <ProductContainer key={product.id} href={`/product/${product.id}`} className={!product.inStock ? classes.outOfStock : ""}>
+              {!product.inStock && <StockText>OUT OF STOCK</StockText>}
               <Circle>
                 <img src={cartIcon} style={{width: "24px"}} />
               </Circle>
