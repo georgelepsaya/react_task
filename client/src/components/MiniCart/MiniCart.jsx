@@ -68,7 +68,6 @@ class MiniCart extends Component {
 
   render() {
     const products = this.props.data;
-    console.dir(this.backdropHeight);
     return (
       <MiniCartContainer>
         <CartButton onClick={() => this.toggleOverlay()}>
