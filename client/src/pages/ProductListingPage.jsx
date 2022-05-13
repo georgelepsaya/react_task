@@ -53,9 +53,9 @@ const ProductInfo = styled.div`
 `
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   &:after {
     display: block;
     content: "";
