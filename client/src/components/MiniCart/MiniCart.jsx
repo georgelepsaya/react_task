@@ -72,6 +72,7 @@ const ButtonsContainer = styled.div`
 `
 
 const ViewBagButton = styled.a`
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,6 +86,7 @@ const ViewBagButton = styled.a`
 `
 
 const CheckOutButton = styled.a`
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,8 +151,8 @@ class MiniCart extends Component {
               <TotalAmount>$200.00</TotalAmount>
             </TotalContainer>
             <ButtonsContainer>
-              <ViewBagButton>VIEW BAG</ViewBagButton>
-              <CheckOutButton>CHECK OUT</CheckOutButton>
+              <ViewBagButton href="/cart">VIEW BAG</ViewBagButton>
+              <CheckOutButton href="/checkout">CHECK OUT</CheckOutButton>
             </ButtonsContainer>
           </ModalContainer>
           </>
