@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Badge from "@material-ui/core/Badge";
 import cartIcon from "../../icons/cart_icon.svg";
 import classes from "./MiniCart.module.css";
+import ReactDOM from "react-dom";
 
 const CartButton = styled.a`
   display: flex;
@@ -24,12 +25,18 @@ const ModalContainer = styled.div`
   z-index: 999;
 `
 
-// const Overlay = styled.div`
-//   position: absolute;
-//   left: 0px;
-//   top: 80px;
-//   background: rgba(57, 55, 72, 0.22);
-// `
+const Backdrop = styled.div`
+  position: absolute;
+  margin-top: 80px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0px;
+  z-index: 20;
+  background-color: rgba(57, 55, 72, 0.22);
+`
+
+const portalElement = document.getElementById("overlays");
 
 class MiniCart extends Component {
   constructor(props) {
@@ -40,12 +47,15 @@ class MiniCart extends Component {
     }
   }
 
+  backdropHeight = 0;
+
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll, true);
+    this.backdropHeight = document.getElementById("main").scrollHeight;
   }
 
   handleScroll = () => {
-    this.setState({ scrolled: document.scrollingElement.scrollTop})
+    this.setState({ scrolled: document.scrollingElement.scrollTop });
   }
 
   toggleOverlay = () => {
@@ -58,6 +68,7 @@ class MiniCart extends Component {
 
   render() {
     const products = this.props.data;
+    console.dir(this.backdropHeight);
     return (
       <MiniCartContainer>
         <CartButton onClick={() => this.toggleOverlay()}>
@@ -67,7 +78,7 @@ class MiniCart extends Component {
         </CartButton>
         {this.state.showModal && 
           <>
-            {/* <Overlay /> */}
+          {ReactDOM.createPortal(<Backdrop style={{height: `${this.backdropHeight + 230}px`}}/>, portalElement)}
             <ModalContainer className={this.state.scrolled > 75 ? classes.togglePosition : ""}>
 
             </ModalContainer>

@@ -25,7 +25,7 @@ const MainWrap = (props) => {
         <header>
           <Navbar data={allData} />
         </header>
-        <MainContainer>
+        <MainContainer id="main">
           <ProductsContainer>
             <Routes>
               {allData.categories.map(category => {
