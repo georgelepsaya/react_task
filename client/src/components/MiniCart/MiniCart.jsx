@@ -79,7 +79,7 @@ class MiniCart extends Component {
           <>
           {ReactDOM.createPortal(<Backdrop style={{height: `${this.backdropHeight + 230}px`}}/>, portalElement)}
             <ModalContainer className={this.state.scrolled > 75 ? classes.togglePosition : ""}>
-
+              
             </ModalContainer>
           </>
         }
