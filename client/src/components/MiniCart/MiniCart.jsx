@@ -4,6 +4,7 @@ import Badge from "@material-ui/core/Badge";
 import cartIcon from "../../icons/cart_icon.svg";
 import classes from "./MiniCart.module.css";
 import ReactDOM from "react-dom";
+import MiniCartItem from './MiniCartItem';
 
 const CartButton = styled.a`
   display: flex;
@@ -18,11 +19,19 @@ const MiniCartContainer = styled.div`
 const ModalContainer = styled.div`
   position: absolute;
   width: 325px;
-  height: 677px;
   background-color: #fff;
   top: 50px;
   right: -30px;
   z-index: 999;
+  padding: 32px 16px;
+  overflow-y: scroll;
+  height: 677px;
+`
+
+const MiniCartHeader = styled.h3`
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 32px;
 `
 
 const Backdrop = styled.div`
@@ -34,6 +43,58 @@ const Backdrop = styled.div`
   height: 0px;
   z-index: 20;
   background-color: rgba(57, 55, 72, 0.22);
+`
+
+const TotalText = styled.p`
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'Roboto';
+`
+
+const TotalAmount = styled.p`
+  font-weight: 700;
+  font-size: 16px;
+`
+
+const TotalContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+`
+
+const ButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
+
+const ViewBagButton = styled.a`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 90px;
+  background: #FFFFFF;
+  border: 1px solid #1D1F22;
+`
+
+const CheckOutButton = styled.a`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 90px;
+  background: #5ECE7B;
+  color: #fff;
 `
 
 const portalElement = document.getElementById("overlays");
@@ -78,9 +139,20 @@ class MiniCart extends Component {
         {this.state.showModal && 
           <>
           {ReactDOM.createPortal(<Backdrop style={{height: `${this.backdropHeight + 230}px`}}/>, portalElement)}
-            <ModalContainer className={this.state.scrolled > 75 ? classes.togglePosition : ""}>
-              
-            </ModalContainer>
+          <ModalContainer className={this.state.scrolled > 75 ? classes.togglePosition : ""}>
+            <MiniCartHeader><b>My Bag</b>, 3 items</MiniCartHeader>
+            <MiniCartItem product={products[2]} />
+            <MiniCartItem product={products[0]} />
+            <MiniCartItem product={products[5]} />
+            <TotalContainer>
+              <TotalText>Total</TotalText>
+              <TotalAmount>$200.00</TotalAmount>
+            </TotalContainer>
+            <ButtonsContainer>
+              <ViewBagButton>VIEW BAG</ViewBagButton>
+              <CheckOutButton>CHECK OUT</CheckOutButton>
+            </ButtonsContainer>
+          </ModalContainer>
           </>
         }
       </MiniCartContainer>

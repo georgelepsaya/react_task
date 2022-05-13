@@ -38,6 +38,9 @@ class AttributeSet extends Component {
         <ItemContainer>
           {items.map(item => {
             if (this.props.attr.name === "Color") {
+              if (item.value === "#FFFFFF") {
+                return <Item key={item.id} bg={item.value} style={{width: "32px", height: "32px", border: "1px solid #1D1F22"}} />
+              }
               return <Item key={item.id} bg={item.value} style={{width: "32px", height: "32px", border: "none"}} />
             }
             return <Item key={item.id}>{item.value}</Item>

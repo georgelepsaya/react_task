@@ -2,47 +2,44 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import plusIcon from "../../icons/plus.svg";
 import minusIcon from "../../icons/minus.svg";
-import SlideRight from "../../icons/slide-right.svg"
-import SlideLeft from "../../icons/slide-left.svg";
 
 const Container = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #E5E5E5;
-  padding: 24px 0;
+  margin-bottom: 40px;
 `
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
 `
 
 const View = styled.div`
-  height: 288px;
+  height: 190px;
   display: flex;
   flex-direction: row;
 `
 
 const Name = styled.h3`
-  font-weight: 600;
-  font-size: 30px;
+  font-weight: 300;
+  font-size: 16px;
 `
 
 const Price = styled.p`
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: 500;
+  font-size: 16px;
   margin-top: 20px;
 `
 
 const AttributeName = styled.h3`
   font-family: 'Roboto', sans-serif !important;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 14px;
   margin-top: 20px;
 `
 
@@ -53,18 +50,21 @@ const ItemContainer = styled.div`
 `
 
 const Item = styled.div`
-  height: 45px;
-  width: 63px;
+  min-width: 24px;
+  min-height: 24px;
   border: 1px solid #1D1F22;
   box-sizing: border-box;
-  margin-right: 12px;
-  font-size: 16px;
+  margin-right: 8px;
   font-weight: 400;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   background-color: ${props => props.bg};
+  &:last-child {
+    margin-right: 0;
+  }
 `
 
 const ChangeAmount = styled.div`
@@ -80,41 +80,21 @@ const ChangeAmountButton = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid #1D1F22;
-  width: 45px;
-  height: 45px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 `
 
 const Amount = styled.p`
   font-weight: 500;
-  font-size: 24px;
+  font-size: 16px;
 `
 
 const ImgView = styled.img`
-  width: 200px;
-  height: 100%;
+  width: 121px;
+  height: 190px;
   object-fit: cover;
-  margin-left: 24px;
-`
-
-const SliderContainer = styled.div`
-  position: absolute;
-  width: 56px;
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-`
-
-const SliderButton = styled.div`
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.73);
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-left: 13px;
 `
 
 const ImgViewWrap = styled.div`
@@ -122,32 +102,7 @@ const ImgViewWrap = styled.div`
   position: relative;
 `
 
-class CartItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageIndex: 0,
-    }
-  }
-
-  leftClickHandler = () => {
-    this.setState((prevState) => {
-      if (prevState.imageIndex - 1 < 0) {
-        return {imageIndex: this.product.gallery.length - 1};
-      }
-      return {imageIndex: prevState.imageIndex - 1};
-    });
-  }
-
-  rightClickHandler = () => {
-    this.setState((prevState) => {
-      if (prevState.imageIndex + 1 > this.product.gallery.length - 1) {
-        return {imageIndex: 0};
-      }
-      return {imageIndex: prevState.imageIndex + 1};
-    });
-  }
-
+class MiniCartItem extends Component {
   product = this.props.product;
 
   render() {
@@ -165,9 +120,9 @@ class CartItem extends Component {
                   {attr.items.map(item => {
                     if (attr.name === "Color") {
                       if (item.value === "#FFFFFF") {
-                        return <Item key={item.id} bg={item.value} style={{width: "32px", height: "32px", border: "1px solid #1D1F22"}} />
+                        return <Item key={item.id} bg={item.value} style={{width: "16px", height: "16px", border: "1px solid #1D1F22"}} />
                       }
-                      return <Item key={item.id} bg={item.value} style={{width: "32px", height: "32px", border: "none"}} />
+                      return <Item key={item.id} bg={item.value} style={{width: "16px", height: "16px", border: "none"}} />
                     }
                     return <Item key={item.id}>{item.value}</Item>
                   })}
@@ -187,11 +142,7 @@ class CartItem extends Component {
             </ChangeAmountButton>
           </ChangeAmount>
           <ImgViewWrap>
-            <ImgView src={product.gallery[this.state.imageIndex]} />
-            <SliderContainer>
-              <SliderButton onClick={() => this.leftClickHandler()} ><img src={SlideLeft} /></SliderButton>
-              <SliderButton onClick={() => this.rightClickHandler()} ><img src={SlideRight} /></SliderButton>
-            </SliderContainer>
+            <ImgView src={product.gallery[0]} />
           </ImgViewWrap>
         </View>
       </Container>
@@ -199,4 +150,4 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem
+export default MiniCartItem;
